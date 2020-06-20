@@ -1,4 +1,4 @@
-# Copyright 2020 Gan Tu
+# Copyright 2020 Gan Tu All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,9 @@
 # For Windows, you may need to change LEVELDB_PLATFORM_POSIX to
 # LEVELDB_PLATFORM_WINDOWS and uncomment all the "...windows..."
 # in the "exclude" folder below. However, I haven't tested that.
+
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
 cc_library(
     name = "leveldb",
     srcs = glob(
@@ -34,21 +37,21 @@ cc_library(
     hdrs = glob(
         ["**/*.h"],
         exclude = [
-          "doc/**",
-          "benchmarks/**",
-          "util/windows_logger.h",
-          "util/env_windows*.h",
+            "doc/**",
+            "benchmarks/**",
+            "util/windows_logger.h",
+            "util/env_windows*.h",
         ],
     ),
-    includes = ["include"],
-    linkopts = [
-        "-Wno-dev",
-        "-pthread"
-    ],
     defines = [
         "LEVELDB_PLATFORM_POSIX=1",
         "LEVELDB_IS_BIG_ENDIAN=0",
         "LEVELDB_BUILD_TESTS=0",
+    ],
+    includes = ["include"],
+    linkopts = [
+        "-Wno-dev",
+        "-pthread",
     ],
     linkstatic = 1,
     visibility = ["//visibility:public"],
