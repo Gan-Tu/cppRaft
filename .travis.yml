@@ -6,4 +6,4 @@ before_install:
   - chmod +x scripts/install_bazel.sh
   - scripts/install_bazel.sh
 script:
-  - echo 'Hello!'
+  - bazel build ...
