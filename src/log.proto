@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package protos.logs;
+package cppraft;
 
 message LogEntry {
    // The term when entry was received by leader (first index is 1)
