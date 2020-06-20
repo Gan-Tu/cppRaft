@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package cppraft;
+
+import "src/log.proto";
+import "src/state.proto";
+
+service RaftConsensusService {
+  // Invoked by leader to replicate log entries
+  // This is also used by the leader for heartbeat (by sending empty entries)
+  rpc AppendEntries(AppendEntriesRequest) returns (AppendEntriesReply) {}
+
+  // Invoked by candidates to gather votes for leader election 
+  // If a follower receives no communication over the election timeout, then it 
+  // assumes there is no viable leader and begins a new leader election
+  rpc RequestVote(RequestVoteRequest) returns (RequestVoteReply) {}
+}
+
+message AppendEntriesRequest {
+  // Leader’s term
+  uint64 term = 1;
+  // So follower can redirect clients
+  ServerIdentifier leader = 2;
+  // Index of log entry immediately preceding new ones
+  uint64 prev_log_index = 3;
+  // Term of prevLogIndex entry
+  uint64 prev_log_term = 4;
+  // Log entries to store
+  // This will be empty for heartbeat.
+  repeated LogEntry logs = 5;
+  // Index of highest log entry known to be committed by the Leader
+  uint64 commit_index = 6;
+}
+
+message AppendEntriesReply {
+  // currentTerm, for leader to update itself
+  uint64 term = 1;
+  // true if follower contained entry matching prevLogIndex and prevLogTerm
+  bool success = 2;
+}
+
+message RequestVoteRequest {
+  // Candidate's term
+  uint64 term = 1;
+  // The candidate that is requesting vote
+  ServerIdentifier candidate = 2;
+  // Index of candidate’s last log entry
+  uint64 last_log_index = 3;
+  // Term of candidate’s last log entry
+  uint64 last_log_entry = 4;
+}
+
+message RequestVoteReply {
+  // currentTerm, for candidate to update itself
+  uint64 term = 1;
+  // true means candidate received vote
+  bool vote_granted = 2;
+}

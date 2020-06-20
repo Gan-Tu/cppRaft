@@ -1,5 +1,6 @@
 load("@rules_cc//cc:defs.bzl", "cc_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
 
 proto_library(
     name = "log_proto",
@@ -11,4 +12,41 @@ cc_proto_library(
     name = "cc_log_proto",
     visibility = ["//visibility:public"],
     deps = [":log_proto"],
+)
+
+proto_library(
+    name = "state_proto",
+    srcs = ["state.proto"],
+    visibility = ["//visibility:public"],
+    deps = [":log_proto"],
+)
+
+cc_proto_library(
+    name = "cc_state_proto",
+    visibility = ["//visibility:public"],
+    deps = [":state_proto"],
+)
+
+proto_library(
+    name = "consensus_proto",
+    srcs = ["consensus.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":log_proto",
+        ":state_proto",
+    ],
+)
+
+cc_proto_library(
+    name = "cc_consensus_proto",
+    visibility = ["//visibility:public"],
+    deps = [":consensus_proto"],
+)
+
+cc_grpc_library(
+    name = "cc_consensus_grpc",
+    srcs = [":consensus_proto"],
+    grpc_only = True,
+    visibility = ["//visibility:public"],
+    deps = [":cc_consensus_proto"],
 )
