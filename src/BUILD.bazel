@@ -67,5 +67,6 @@ cc_library(
     deps = [
         ":cc_consensus_grpc",
         "@com_github_grpc_grpc//:grpc++",
+        "@com_google_glog//:glog",
     ],
 )

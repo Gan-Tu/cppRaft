@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "src/raft_instance.h"
+#include <glog/logging.h>
 
 namespace cppraft {
 
