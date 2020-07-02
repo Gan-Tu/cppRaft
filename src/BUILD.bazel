@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
 
@@ -58,4 +58,14 @@ cc_grpc_library(
     srcs = [":consensus_proto"],
     grpc_only = True,
     deps = [":cc_consensus_proto"],
+)
+
+cc_library(
+    name = "raft_instance",
+    srcs = ["raft_instance.cc"],
+    hdrs = ["raft_instance.h"],
+    deps = [
+        ":cc_consensus_grpc",
+        "@com_github_grpc_grpc//:grpc++",
+    ],
 )
