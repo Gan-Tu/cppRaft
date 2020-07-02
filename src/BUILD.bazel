@@ -61,9 +61,9 @@ cc_grpc_library(
 )
 
 cc_library(
-    name = "raft_instance",
-    srcs = ["raft_instance.cc"],
-    hdrs = ["raft_instance.h"],
+    name = "raft_impl",
+    srcs = ["raft_impl.cc"],
+    hdrs = ["raft_impl.h"],
     deps = [
         ":cc_consensus_grpc",
         "@com_github_grpc_grpc//:grpc++",

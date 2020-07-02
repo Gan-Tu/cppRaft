@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/raft_instance.h"
+#include "src/raft_impl.h"
+
 #include <glog/logging.h>
 
 namespace cppraft {
@@ -20,15 +21,15 @@ namespace cppraft {
 using grpc::ServerContext;
 using grpc::Status;
 
-Status RaftInstance::AppendEntries(ServerContext* content,
-                                   const AppendEntriesRequest* request,
-                                   AppendEntriesReply* reply) {
+Status RaftImpl::AppendEntries(ServerContext* content,
+                               const AppendEntriesRequest* request,
+                               AppendEntriesReply* reply) {
   return Status::OK;
 }
 
-Status RaftInstance::RequestVote(ServerContext* content,
-                                 const RequestVoteRequest* request,
-                                 RequestVoteReply* reply) {
+Status RaftImpl::RequestVote(ServerContext* content,
+                             const RequestVoteRequest* request,
+                             RequestVoteReply* reply) {
   return Status::OK;
 }
 }  // namespace cppraft

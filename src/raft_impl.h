@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef CPPRAFT_RAFT_INSTANCE_H_
-#define CPPRAFT_RAFT_INSTANCE_H_
+#ifndef CPPRAFT_RAFT_IMPL_H_
+#define CPPRAFT_RAFT_IMPL_H_
 
 #include "grpcpp/grpcpp.h"
 #include "src/consensus.grpc.pb.h"
 
 namespace cppraft {
 
-class RaftInstance final : public RaftConsensusService::Service {
+class RaftImpl final : public RaftConsensusService::Service {
   // Handle a request from the leader for appending log entries
   // This is also how we communicate with leader for heartbeat monitoring
   grpc::Status AppendEntries(grpc::ServerContext* content,
@@ -35,4 +35,4 @@ class RaftInstance final : public RaftConsensusService::Service {
 
 }  // namespace cppraft
 
-#endif  // CPPRAFT_RAFT_INSTANCE_H_
+#endif  // CPPRAFT_RAFT_IMPL_H_
