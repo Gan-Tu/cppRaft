@@ -14,7 +14,7 @@
 
 #include "src/raft_impl.h"
 
-#include <glog/logging.h>
+#include "glog/logging.h"
 
 namespace cppraft {
 
