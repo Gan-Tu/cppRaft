@@ -70,3 +70,14 @@ cc_library(
         "@com_google_glog//:glog",
     ],
 )
+
+cc_library(
+    name = "raft_instance",
+    srcs = ["raft_instance.cc"],
+    hdrs = ["raft_instance.h"],
+    deps = [
+        ":raft_impl",
+        "@com_github_grpc_grpc//:grpc++",
+        "@com_google_glog//:glog",
+    ],
+)
