@@ -19,8 +19,6 @@
 #include "src/raft_instance.h"
 
 ABSL_FLAG(std::string, logdir, "", "Write logs to logdir, instead of stderr");
-ABSL_FLAG(std::string, hostname, "0.0.0.0",
-          "Hostname for Raft instance to listen on");
 ABSL_FLAG(uint32_t, port, 50051, "Port for Raft instance to listen on");
 
 using cppraft::RaftInstance;
@@ -38,8 +36,8 @@ int main(int argc, char* argv[]) {
   google::InitGoogleLogging(/*program_name=*/argv[0]);
 
   RaftInstance raft;
-  const std::string server_address = absl::StrCat(
-      absl::GetFlag(FLAGS_hostname), ":", absl::GetFlag(FLAGS_port));
+  const std::string server_address =
+      absl::StrCat("0.0.0.0:", absl::GetFlag(FLAGS_port));
   raft.StartInsecure(server_address);
   raft.Wait();
 
