@@ -23,7 +23,7 @@ using grpc::ServerBuilder;
 
 void RaftInstance::Start(
     const std::string& server_address,
-    const std::shared_ptr<grpc::ServerCredentials> credentials) {
+    const std::shared_ptr<grpc::ServerCredentials>& credentials) {
   ServerBuilder builder;
   builder.AddListeningPort(server_address, credentials);
 

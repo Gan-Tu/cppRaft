@@ -27,7 +27,7 @@ class RaftInstance {
  public:
   // Start the Raft instance and listen on |server_address| using |credentials|.
   void Start(const std::string& server_address,
-             const std::shared_ptr<grpc::ServerCredentials> credentials);
+             const std::shared_ptr<grpc::ServerCredentials>& credentials);
 
   // Similar to Start(...), but use grpc insecure credentials as default.
   void StartInsecure(const std::string& server_address);
