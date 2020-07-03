@@ -236,3 +236,6 @@ bazel-cppGFS2.0
 
 # Visual Studio Code
 .vscode/
+
+# Project development files
+logs/* 
