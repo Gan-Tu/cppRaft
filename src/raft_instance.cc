@@ -21,14 +21,23 @@ namespace cppraft {
 using grpc::Server;
 using grpc::ServerBuilder;
 
-void RaftInstance::Start(const std::string& server_address,
-                         std::shared_ptr<grpc::ServerCredentials> credentials) {
-  RaftImpl raft_impl;
-
+void RaftInstance::Start(
+    const std::string& server_address,
+    const std::shared_ptr<grpc::ServerCredentials> credentials) {
   ServerBuilder builder;
   builder.AddListeningPort(server_address, credentials);
+
+  RaftImpl raft_impl;
   builder.RegisterService(&raft_impl);
+
   server_ = builder.BuildAndStart();
   LOG(INFO) << "Raft instance listening on " << server_address;
 }
+
+void RaftInstance::StartInsecure(const std::string& server_address) {
+  Start(server_address, grpc::InsecureServerCredentials());
+}
+
+void RaftInstance::Wait() { server_->Wait(); }
+
 }  // namespace cppraft
